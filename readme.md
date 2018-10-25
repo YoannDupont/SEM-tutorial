@@ -35,14 +35,7 @@ It is a good idea to do those steps in this order. If you load BRAT files, SEM w
 
 You will now be annotating, training and using a trained tagger to create an annotated corpus. The overall process looks like this:
 
-```mermaid
-graph TD
-A(annotate some document/s) --> B
-B(train a model) --> C
-C(label some unannotated document/s) --> D
-D(manually correct annotations) --> B
-D --> E(stop when engouh data annotated)
-```
+[the annotation/training process](training-loop.png)
 
 This is poor man's [active learning](https://en.wikipedia.org/wiki/Active_learning_(machine_learning)). The process is the same as in active learning, but lacks the very critical computation of the best unseen example to best improve quality in the next training step.
 
