@@ -9,7 +9,7 @@ This tutorial will make you annotate some french food recipes gathered from [750
 
 ... here are the first steps you need to follow:
 
-- install [SEM](https://github.com/YoannDupont/SEM);
+- install [SEM](https://github.com/YoannDupont/SEM) version >= 3.3.0;
 - copy the content of `sem_data` to whatever location you local SEM installation uses (typically `~/sem_data`).
 
 # Launch the interface
@@ -26,8 +26,8 @@ If you did not annotate everything and want to finish later, see the [saving you
 
 # If you want to load everything in the interface
 
-- First (very important, it will not work otherwise), load the "cuisine.txt" tagset: `File ==> load tagset` or `Alt+f ==> t`;
-- Second, load documents: `File ==> open...` or `Ctrl+o` and select documents in the "raw" folder.
+- First (very important, it will not work otherwise), load the `cuisine.txt` tagset: `File ==> load tagset` or `Alt+f ==> t`;
+- Second, load documents: `File ==> open...` or `Ctrl+o` and select documents in the `raw` folder.
 
 It is a good idea to do those steps in this order. If you load BRAT files, SEM will use the name of the loaded tagset to create his own (and use NER as a default value). Tagset names are important, training can/will fail if names are wrong.
 
