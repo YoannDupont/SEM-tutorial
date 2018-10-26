@@ -37,7 +37,7 @@ You will now be annotating, training and using a trained tagger to create an ann
 
 ![the annotation/training process](training-loop.png)
 
-This is poor man's [active learning](https://en.wikipedia.org/wiki/Active_learning_(machine_learning)). The process is the same as in active learning, but lacks the very critical computation of the best unseen example to best improve quality in the next training step.
+This is poor man's [active learning](https://en.wikipedia.org/wiki/Active_learning_(machine_learning)). The process is the same as in active learning, but lacks the very critical unseen examples selection strategies (query strategies), users will have to choose unseen examples on their own.
 
 SEM has a [manual](https://github.com/YoannDupont/SEM/tree/master/manual) in [French](https://github.com/YoannDupont/SEM/blob/master/manual/manual-fr.pdf) (also translated in [English](https://github.com/YoannDupont/SEM/blob/master/manual/manual-en.pdf)) to explain you how to annotate and train new models, use it if you wonder what to do.
 
@@ -59,9 +59,9 @@ Once loaded the `tag document` button should become clickable. To tag a document
 
 ## Saving your work
 
-If you wish to save your work to reload it later: `Alt+f ==> save as.. ==> BRAT corpus` or `Alt+f ==> a ==> b` and choose save in the `annotated` folder. You can then load it with the following command line:
+If you wish to save your work to reload it later: `Alt+f ==> save as.. ==> BRAT corpus` or `Alt+f ==> a ==> b` and save in the `annotated` folder. You can then load it with the following command line:
 
-`python -m sem annotation_gui -t ~/sem_data/resources/tagsets/cuisine.txt -d annotated/*.ann`
+`python -m sem annotation_gui -t ~/sem_data/resources/tagsets/cuisine.txt -d annotated/*.txt`
 
 # That's all folks!
 
