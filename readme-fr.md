@@ -1,6 +1,6 @@
 # Tutoriel SEM
 
-(Si vous préférez, vous pouvre [lire ce tutoriel en anglais](readme.md))
+(Si vous préférez, vous pouvez [lire ce tutoriel en anglais](readme.md))
 
 Ce tutoriel a pour but de vous montrer comment utiliser l'interface graphique d'annotation de SEM pour produire un corpus de référence et des modèles que vous pourrez utiliser pour annoter des nouvelles données textuelles.
 
