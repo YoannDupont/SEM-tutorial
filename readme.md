@@ -1,5 +1,6 @@
-
 # SEM tutorial
+
+(If you rather read french, see [this readme in french](readme-fr.md))
 
 This tutorial aims at showing you how to use the SEM annotation GUI to produce annotated data and models you can use to annotate textual content.
 
@@ -77,7 +78,7 @@ Or launch the tagging GUI:
 
 `python -m sem gui`
 
-click on the `select document(s)` button and select every document in the `evaluation` folder. Then, click on "cuisine.xml" and `tag`. This will create a folder in `~/sem_data/outputs/<timestamp>`.
+click on the `select document(s)` button and select every document in the `evaluation` folder. Then, click on "cuisine.xml" and `tag`. This will create a folder in `~/sem_data/outputs/<timestamp>`. You can then copy the content of this folder in `tagged`.
 
 ## Output format
 
@@ -104,15 +105,15 @@ In this case, use BRAT.
 It is always good to estimate the quality of the tagger you produced. For this, you need:
 
 - documents with a reference annotation to evaluate your system: `evaluation`;
-- annotated documents annotated by some tagger: `~/sem_data/outputs/<timestamp>` (or `tagged`, in the following we will use the former).
+- annotated documents annotated by some tagger: `tagged`.
 
 You can now launch the command:
 
-`python -m sem evaluate ~/sem_data/outputs/<timestamp>/*.txt -c evaluation/*.txt -f brat`
+`python -m sem evaluate tagged/*.txt -c evaluation/*.txt -f brat`
 
 ... And it will fail. What? This is SEM's current limitation concerning evaluation : it can only evaluate one document at a time. In order to have your evaluation, you first need to create two big files by concatenating BRAT files. Your commands should look like:
 
-`python concat_brats.py ~/sem_data/outputs/<timestamp>/*.txt -o output`
+`python concat_brats.py tagged/*.txt -o output`
 
 `python concat_brats.py evaluation/*.txt -o evaluation`
 
