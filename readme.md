@@ -3,11 +3,11 @@
 
 This tutorial aims at showing you how to use the SEM annotation GUI to produce annotated data and models you can use to annotate textual content.
 
-This tutorial will make you annotate some french food recipes gathered from [750g](https://www.750g.com/). If you do not understand french (and even if you do), some annotations are provided in case of doubt (in `reference`), you can use those as cheat sheets. If you are allergic to french, you are welcome to create a tutorial in another language.
+This tutorial will make you annotate some french food recipes gathered from [750g](https://www.750g.com/). If you do not understand french (and even if you do), some annotations are provided in `reference`, you can use those as cheat sheets. If you are allergic to french, you are welcome to create a tutorial using data in another language.
 
 SEM has a [manual](https://github.com/YoannDupont/SEM/tree/master/manual) in [French](https://github.com/YoannDupont/SEM/blob/master/manual/manual-fr.pdf) (also translated in [English](https://github.com/YoannDupont/SEM/blob/master/manual/manual-en.pdf)), do not hesitate to check it if in doubt.
 
-# Before you do anything here...
+# Before you do anything...
 
 ... here are the first steps you need to follow:
 
@@ -26,10 +26,10 @@ Or, if want everything to be loaded at startup:
 
 If you did not annotate everything and want to finish later, see the [saving your work](#saving-your-work) section.
 
-# If you want to load everything in the interface
+# If you want to load everything through the interface
 
-- First (very important, it will not work otherwise), load the `cuisine.txt` tagset: `File ==> load tagset` or `Alt+f ==> t`;
-- Second, load documents: `File ==> open...` or `Ctrl+o` and select documents in the `raw` folder.
+- First, load the `cuisine.txt` tagset: `File ==> load tagset` or `Alt+f ==> t`;
+- second, load documents: `File ==> open...` or `Ctrl+o` and select documents in the `raw` folder.
 
 It is a good idea to do those steps in this order. If you load BRAT files, SEM will use the name of the loaded tagset to create his own (and use NER as a default value). Tagset names are important, training can/will fail if names are wrong.
 
@@ -51,13 +51,13 @@ When you finished annotating a document, you may want to train a new model to pr
 - for `select workflow` click on `cuisine.xml`;
 - click on the `train` button in the bottom of the window to launch the training (neural networks are not in SEM... yet).
 
-The model should be automaticaly copied to the right location, but if it is not the case, please refer to the manual (fr: section "lancer l'entraînement"; en: "Launch Training").
+The model should be automatically copied to the right location, but if it is not the case, please refer to the manual (fr: section "lancer l'entraînement"; en: "Launch Training").
 
 ## Label a document
 
 After training a model, you need to systematically load the worklow again (models are not automatically reloaded). To do that: `File ==> load master` or `Alt+f ==> m` and choose the `cuisine.xml` workflow.
 
-Once loaded the `tag document` button should become clickable. To tag a document, simply select a document without annotations and click on `tag document` button in the upper left corner (at the time of writing this). If you do not have any annotation, well, tough luck.
+Once the workflow loaded, the `tag document` button should become clickable. To tag a document, simply select a document without annotations and click on the `tag document` button in the upper left corner (at the time of writing this). If you do not have any annotation, well, tough luck.
 
 ## Saving your work
 
@@ -67,7 +67,7 @@ If you wish to save your work to reload it later: `Alt+f ==> save as.. ==> BRAT 
 
 # Tagging new documents
 
-SEM's manual annotation interface is a good way to produce tagged corpora, but it is not the best way to annotate lots of documents. Let's take files in the `evaluation` folder as examples (do not worry: when SEM annotates a document, it first removes previously existing annotations), newly annotated texts will be put in `tagged`.
+SEM's manual annotation interface is a good way to produce tagged corpora, but it is not the best way to annotate lots of documents. Let's take files in the `evaluation` folder as examples (those files have a reference annotation, do not worry: when SEM annotates a document, it first removes previously existing annotations), newly annotated texts will be put in `tagged`.
 
 If you want to tag lots of documents, you have two options. You can either launch the annotation from the command line:
 
@@ -83,7 +83,7 @@ click on the `select document(s)` button and select every document in the `evalu
 
 By default, SEM will create HTML files where your annotations are highlighted in different colors. This format is used to have a quick glance at your data. It is has no other use in SEM (you cannot load HTML files as documents).
 
-You can choose a more appropriate output format for future works. To this end, you have two ways to do it:
+You can choose a more appropriate output format for future works. To this end, you have the following ways to do it:
 
 - in the GUI, in the upper right, you can select your output format. This also give you the list of output formats handled by SEM;
 - you can change it in the `tagger` command line by setting the `--force-format` option (or `-f`);
@@ -119,7 +119,7 @@ You can now launch the command:
 This will create:
 
 - `output.txt` and `output.ann` for your system's output
-- `evaluation.txt` and `evaluation.ann` for your system's output
+- `evaluation.txt` and `evaluation.ann` for your reference output
 
 You can now launch the command:
 
