@@ -52,14 +52,12 @@ Lorsque vous aurez fini d'annoter un document, vous souhaiterez peut-être entra
 - pour `select workflow` cliquez sur `cuisine.xml`;
 - cliquez sur le bouton `train` en bas de la fenêtre pour lancer l'entraînement (SEM ne propose pas d'entraîner des réseaux de neurones... pour le moment).
 
-The model should be automatically copied to the right location, but if it is not the case, please refer to the manual (fr: section "lancer l'entraînement"; en: "Launch Training").
 Le modèle devrait automatiquement être copié dans le bon dossier. Si ce n'est pas le cas, référez-vous au manuel (fr: section "lancer l'entraînement"; en: "Launch Training").
 
 ## Annoter un document
 
 Une fois le modèle entraîné, vous devez systématiquement charger le workflow à nouveau (la mise-à-jour des modèles n'est pas automatique). Pour ce faire : `File ==> load master` ou `Alt+f ==> m` et choisissez le workflow `cuisine.xml`.
 
-Once the workflow loaded, the `tag document` button should become clickable. To tag a document, simply select a document without annotations and click on the `tag document` button in the upper left corner (at the time of writing this). If you do not have any annotation, well, tough luck.
 Une fois le workflow chargé, le bouton `tag document` devient actif. Pour annoter un document sans annotations, il suffit de le sélectionner et de cliquer sur le bouton `tag document` en haut à gauche (au moment d'écrire ce tutoriel). S'il n'y a pas d'annotations... Dommage !
 
 ## Sauvegarder votre travail
@@ -70,7 +68,7 @@ Si vous souhaitez sauvegarder votre travail pour le récupérer plus tard : `Alt
 
 # Annoter de nouveaux documents
 
-L'interface d'annotation manuelle de SEM est une bonne façon de produire un corpus annoté, elle est moins efficace pour annoter beaucoup de documents. Prenons pour l'exemple les fichier dans le dossier `evaluation` (ces fichiers sont déjà annotés, pas de soucis : SEM supprimera les annotations déjà présentes au moment de créer les siennes). Les données nouvellement annotées seront mises dans le dossier `tagged`.
+L'interface d'annotation manuelle de SEM est une bonne façon de produire un corpus annoté, mais elle est moins efficace pour annoter beaucoup de documents. Prenons pour exemple les fichier dans le dossier `evaluation` (ces fichiers sont déjà annotés, pas de soucis : SEM supprimera les annotations déjà présentes au moment de créer les siennes). Les données nouvellement annotées seront mises dans le dossier `tagged`.
 
 Si vous souhaitez annoter beaucoup de document, deux options s'offrent à vous. Vous pouvez soit annoter en utilisant le terminal :
 
@@ -113,7 +111,7 @@ Vous pouvez à présent lancer la commande :
 
 `python -m sem evaluate tagged/*.txt -c evaluation/*.txt -f brat`
 
-... qui écouera. Plaît-il ? Il s'agit d'une limitation de SEM à l'heure actuelle : il n'est possible d'évaluer qu'un seul document à la fois. Pour obtenir une évaluation, vous devez d'abord créer deux gros fichiers que vous obtiendez en concaténant des fichiers BRAT. Les commandes debvraient être les suivantes :
+... qui échouera. Plaît-il ? Il s'agit d'une limitation de SEM à l'heure actuelle : il n'est possible d'évaluer qu'un seul document à la fois. Pour obtenir une évaluation, vous devez d'abord créer deux gros fichiers que vous obtiendez en concaténant des fichiers BRAT. Les commandes devraient être les suivantes :
 
 `python concat_brats.py tagged/*.txt -o output`
 
