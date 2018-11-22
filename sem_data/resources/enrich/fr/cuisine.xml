@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<information>
+    
+    <entries>
+        <before>
+            <entry name="word" />
+            <entry name="POS" />
+        </before>
+        <after>
+            <entry name="cuisine" mode="train" />
+        </after>
+    </entries>
+    
+    <features>
+        <nullary name="lower" action="lower" />
+    </features>
+</information>
