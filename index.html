@@ -1,0 +1,174 @@
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>SEM tutorial</title>
+	</head>
+	<body>
+<h1>Tutoriel SEM</h1>
+
+<p>(Si vous préférez, vous pouvez <a href="readme.md">lire ce tutoriel en anglais</a>)</p>
+
+<p>Ce tutoriel a pour but de vous montrer comment utiliser l'interface graphique d'annotation de SEM pour produire un corpus de référence et des modèles que vous pourrez utiliser pour annoter des nouvelles données textuelles.</p>
+
+<p>Vous allez annoter ici des recettes de cuisines (en français) récupérées de <a href="https://www.750g.com/">750g</a>. Si vous ne comprennez pas le français (et même si c'est le cas), des annotations de référence sont données dans le dossier <pre>reference</pre>, vous pouvez les utiliser pour vous aider. Si vous êtes allergique au français, vous êtes libre de créer d'autres données annotées dans une autre langue.</p>
+
+<p>SEM a un <a href="https://github.com/YoannDupont/SEM/tree/master/manual">manuel</a> en <a href="https://github.com/YoannDupont/SEM/blob/master/manual/manual-fr.pdf">français</a> et en <a href="https://github.com/YoannDupont/SEM/blob/master/manual/manual-en.pdf">anglais</a>, n'hésitez pas à y jeter un œil en cas de doute.</p>
+
+<h1>Avant de commencer...</h1>
+
+<p>... assurez-vous de bien :</p>
+
+<ul>
+<li>installer <a href="https://github.com/YoannDupont/SEM">SEM</a> version >= 3.3.0;</li>
+<li>copier le contenu de "sem_data" dans le dossier utilisé par votre installation locale de SEM (en toute logique "~/sem_data").</li>
+</ul>
+
+<h1>Lancer l'interface</h1>
+
+<p>Vous pouvez à présent lancer l'interface !</p>
+
+<pre>python -m sem annotation_gui</pre>
+
+<p>Ou, si vous souhaitez que tout soit chargé au démarrage :</p>
+
+<pre>python -m sem annotation_gui -t ~/sem_data/resources/tagsets/cuisine.txt -d raw/*.txt</pre>
+
+<p>Si vous n'avez pas fini d'annoter vos documents et souhaitez finir plus tard, voyez la section <a href="#sauvegarder-votre-travail">sauvegarder votre travail</a></p>
+
+<h1>Si vous voulez tout charger via l'interface</h1>
+
+<ul>
+<li>d'abord, chargez le tagset "cuisine.txt" : "File ==&gt; load tagset" ou "Alt+f ==&gt; t";</li>
+<li>ensuite, chargez les documents : "File ==&gt; open..." ou "Ctrl+o" et sélectionnez les documents dans le dossier "raw"</li>
+</ul>
+
+<p>Il est préférable de faire ces deux étapes dans l'ordre. Si vous chargez des fichiers BRAT, SEM utilisera le nom du tagset que vous avez chargé (et utilisera "NER" par défaut). Les noms des tagsets sont importants, l'entraînement échouera éventuellement/certainement si les noms ne correspondent pas.</p>
+
+<h1>Boucle annotation/entraînement</h1>
+
+<p>Vous allez à présent annoter des données, entraîner et utiliser un modèle pour créer un corpus annoté. Le processus général ressemble à :</p>
+
+<a href="training-loop.png">the annotation/training process</a>
+
+<p>Il s'agit d'une forme très simplifiée d'<a href="https://fr.wikipedia.org/wiki/Apprentissage_actif">apprentissage actif</a>. Le processus global est le même, mais il n'y a pas ici de stratégies de sélection d'exemples inconnus (requêtes), les utilisateurs/utilisatrices devront le faire eux-mêmes/elles-mêmes.</p>
+
+<p>Le manuel de SEM (<a href="https://github.com/YoannDupont/SEM/blob/master/manual/manual-fr.pdf">français</a>, <a href="https://github.com/YoannDupont/SEM/blob/master/manual/manual-en.pdf">anglais</a>) explique comment entraîner de nouveaux modèles, jetez-y un œil si vous ne voyez pas comment faire.</p>
+
+<h2>Entraîner un nouveau modèle</h2>
+
+<p>Lorsque vous aurez fini d'annoter un document, vous souhaiterez peut-être entraîner un nouveau modèle pour produire une annotation candidate. Pour ouvrir la popup servant à lancer l'entraînement, cliquez sur le bouton "train" en haut à gauche (au moment d'écrire ce tutoriel) ou tapez "Ctrl+t", puis :</p>
+
+<ul>
+<li>pour "document filter" choisissez "only documents with annotations";</li>
+<li>pour "select workflow" cliquez sur "cuisine.xml";</li>
+<li>cliquez sur le bouton "train" en bas de la fenêtre pour lancer l'entraînement (SEM ne propose pas d'entraîner des réseaux de neurones... pour le moment).</li>
+</ul>
+
+<p>Le modèle devrait automatiquement être copié dans le bon dossier. Si ce n'est pas le cas, référez-vous au manuel (fr: section "lancer l'entraînement"; en: "Launch Training").</p>
+
+<h2>Annoter un document</h2>
+
+<p>Une fois le modèle entraîné, vous devez systématiquement charger le workflow à nouveau (la mise-à-jour des modèles n'est pas automatique). Pour ce faire : "File ==&gt; load master" ou "Alt+f ==&gt; m" et choisissez le workflow "cuisine.xml".</p>
+
+<p>Une fois le workflow chargé, le bouton "tag document" devient actif. Pour annoter un document sans annotations, il suffit de le sélectionner et de cliquer sur le bouton "tag document" en haut à gauche (au moment d'écrire ce tutoriel). S'il n'y a pas d'annotations... Dommage !</p>
+
+<h2>Sauvegarder votre travail</h2>
+
+<p>Si vous souhaitez sauvegarder votre travail pour le récupérer plus tard : "Alt+f ==&gt; save as.. ==&gt; BRAT corpus" ou "Alt+f ==&gt; a ==&gt; b" et sauvegardez dans le dossier "annotated". Vous pourrez alors le charger avec la commande de terminal :</p>
+
+<pre>python -m sem annotation_gui -t ~/sem_data/resources/tagsets/cuisine.txt -d annotated/*.txt</pre>
+
+<h1>Annoter de nouveaux documents</h1>
+
+<p>L'interface d'annotation manuelle de SEM est une bonne façon de produire un corpus annoté, mais elle est moins efficace pour annoter beaucoup de documents. Prenons pour exemple les fichier dans le dossier "evaluation" (ces fichiers sont déjà annotés, pas de soucis : SEM supprimera les annotations déjà présentes au moment de créer les siennes). Les données nouvellement annotées seront mises dans le dossier "tagged".</p>
+
+<p>Si vous souhaitez annoter beaucoup de document, deux options s'offrent à vous. Vous pouvez soit annoter en utilisant le terminal :</p>
+
+<pre>python -m sem tagger ~/sem_data/resources/master/fr/cuisine.xml evaluation/* -o tagged</pre>
+
+<p>Ou via l'interface graphique :</p>
+
+<pre>python -m sem gui</pre>
+
+<p>cliquez alors sur le bouton "select document(s)" et sélectionnez les documents dans le dossier "evaluation". Cliquez ensuite sur le workflow `cuisine.xml` et finalement `tag`. Cela créera un dossier "~/sem_data/outputs/&lt;horodatage&gt;". Il faudra alors copier son contenu dans le dossier "tagged".</p>
+
+<h2>Format de sortie</h2>
+
+<p>De base, SEM créé des fichiers HTML en sortie, où les annotations sont surlignées avec différentes couleurs. Ce format est utilisé pour avoir une vue d'ensemble aux annotations. Ce format n'a pas d'autre usage dans SEM (il n'est pas possible de charger un fichier HTML en tant que document).</p>
+
+<p>Vous pouvez choisir un format plus approprié pour des travaux futurs. Pour cela, les moyens suivants sont à votre disposition :</p>
+
+<ul>
+<li>dans l'interface graphique, en haut à droite, vous pouvez choisir le format de sortie, cela vous donne également la liste des formats supportés par SEM ;</li>
+<li>vous pouvez la changer pour la commande "tagger" dans le terminal en configurant l'option "--force-format" (ou "-f");</li>
+<li>il est également possible de changer le format de sortie par défaut en modifiant directement le fichier de configuration "~/sem_data/resources/master/fr/cuisine.xml" en utilisant le format souhaité (supporté par SEM).</li>
+</ul>
+
+<p>Les formats recommandés pour travaux futurs sont (sans ordre de préférence) :</p>
+
+<ul>
+<li>BRAT,</li>
+<li>CoNLL,</li>
+<li>GATE,</li>
+<li>sem_xml,</li>
+<li>json (suit le format sem_xml).</li>
+</ul>
+
+<p>Ici, nous utiliserons le format BRAT.</p>
+
+<h1>Evaluer la qualité du système</h1>
+
+<p>Il est toujours bon d'estimer la qualité d'un système. Pour cela, il faudra :</p>
+
+<ul>
+<li>des documents ayant une annotation de référence pour évaluer votre system : ils sont dans le dossier "evaluation" ;</li>
+<li>ces mêmes documents annotés par votre système: "tagged".</li>
+</ul>
+
+<p>Vous pouvez à présent lancer la commande :</p>
+
+<pre>python -m sem evaluate tagged/*.txt -c evaluation/*.txt -f brat</pre>
+
+<p>... qui échouera. Plaît-il ? Il s'agit d'une limitation de SEM à l'heure actuelle : il n'est possible d'évaluer qu'un seul document à la fois. Pour obtenir une évaluation, vous devez d'abord créer deux gros fichiers que vous obtiendez en concaténant des fichiers BRAT. Les commandes devraient être les suivantes :</p>
+
+<pre>python concat_brats.py tagged/*.txt -o output</pre>
+
+<pre>python concat_brats.py evaluation/*.txt -o evaluation</pre>
+
+<p>Elle vont créer:</p>
+
+<ul>
+<li>"output.txt" et "output.ann" pour la sortie de votre système ;</li>
+<li>"evaluation.txt" et `evaluation.ann" pour la sortie de référence.</li>
+</ul>
+
+<p>Vous pouvez alors lancer la commande :</p>
+
+<pre>python -m sem evaluate output.ann -c evaluation.ann -f brat</pre>
+
+<p>qui affichera diverses mesures, que vous pourrez rediriger vers un fichier "quality.txt" de la façon suivante :</p>
+
+<pre>python -m sem evaluate output.ann -c evaluation.ann -f brat > quality.txt</pre>
+
+<p>Vous aurez alors une estimation de la qualité de votre système ! En utilisant SEM v3.3.0, vous devriez avoir les scores suivants de précision, rappel et f-mesure :</p>
+
+<table style="border:1px solid black;">
+	<tr><th>entity</th><th>measure</th><th>value</th></tr>
+	<tr><td>ingrédient</td><td>precision</td><td>0.5294</td></tr>
+	<tr><td>ingrédient</td><td>recall</td><td>0.2903</td></tr>
+	<tr><td>ingrédient</td><td>fscore</td><td>0.3750</td></tr>
+	<tr><td>quantité</td><td>precision</td><td>0.7000</td></tr>
+	<tr><td>quantité</td><td>recall</td><td>0.6364</td></tr>
+	<tr><td>quantité</td><td>fscore</td><td>0.6667</td></tr>
+	<tr><td>global</td><td>precision</td><td>0.5926</td></tr>
+	<tr><td>global</td><td>recall</td><td>0.3810</td></tr>
+	<tr><td>global</td><td>fscore</td><td>0.4638</td></tr>
+</table>
+
+<h1>That's all folks!</h1>
+
+<p>Cela fait beaucoup de texte, mais une fois que vous aurez fait le processus une ou deux fois, cela devrait se aller vite. Si vous avez l'impression que des expliquations manquent ou ne sont pas claires, vous êtes invité·e à ouvrir une "issue".</p>
+
+<p>Merci d'utiliser/essayer SEM !</p>
+	</body>
+</html>
